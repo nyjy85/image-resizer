@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <form id="upload" enctype="multipart/form-data" action="/upload" method="post">
+   		<input id="image_url" type="file" name="image_url" />
+   		<input type="submit" value="Upload image">
+	</form>
+
+	<div id="gallery">
+	{% for pic in pictures %}
+		<img src="/{{pic}}"/ >
+	{% endfor %}
+	</div>
+{% endblock %}
