@@ -7,7 +7,10 @@ var Pics;
 
 var picSchema = new mongoose.Schema({
 	file_name: String,
-	file_path: String
+	file_path: String,
+	file_320: String,
+	file_120: String,
+	file_48: String
 });
 
 Pics = mongoose.model('Pics', picSchema);
