@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var routes = require('./routes');
 var swig = require('swig');
+var async = require('async');
 
 
 var app = express();
