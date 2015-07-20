@@ -2,9 +2,6 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var Pics = require('../models').Pics;
-var AdmZip = require('adm-zip');
-var async = require('async');
-var easyzip = require('easy-zip');
 var zipFolder = require('zip-folder');
 
 
@@ -28,44 +25,13 @@ function compressAndResize (imageUrl, response, file320, file120, file48) {
     
     console.log('process exited');
 
-    // var photos = ['public/images/120/' + file120, 'public/images/320/' + file320, 'public/images/48/' + file48];
-    var files = [
-        {source:'public/images/120/' + file120, target: file120},
-        {source:'public/images/320/' + file320, target: file320},
-        {source:'public/images/48/' + file48, target: file48}
-    ];
     zipFolder('public/images/'+imageUrl.slice(22,54), dirShit + '/' + zipname, function(err){
       if(err) console.log('oh no!', err);
       else response.redirect('/');
     })
-    // var zip = new easyzip.EasyZip();
-    // zip.batchAdd(files, function(){
-    //   zip.writeToFile(dirShit + '/' + zipname, function(){
-    //     response.redirect('/');
-    //   });
-    // });
-
-    // var zipFiles = function(file, callback){
-    //   callback(null, zip.addLocalFile(file))
-    // };
-
-    // async.map(photos, zipFiles, function(err, results){
-    //   if (err) console.log('async.mapp error:', err);
-    //   zip.writeZip(dirShit + '/' + zipname, response.redirect('/'));
-    // })
-    // photos.forEach(function(photo){ 
-    //   zip.addLocalFile(photo)
-    // })
-    // return 
   });
   childProcess.send(imageUrl);
 }
-
-// var changeFileName = function(file){
-//   if ( (/120/).test(file) ) return file.replace(/\./, "120.");
-//   if ( (/320/).test(file) ) return file.replace(/\./, "320.");
-//   if ( (/48/).test(file) ) return file.replace(/\./, "48.")
-// };
 
 var photos;
 /* GET home page. */
