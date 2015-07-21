@@ -8,9 +8,11 @@ var Pics;
 var picSchema = new mongoose.Schema({
 	file_name: String,
 	file_path: String,
-	file_320: String,
-	file_120: String,
-	file_48: String
+	file_300: String,
+	file_336: String,
+	file_728: String,
+	file_600: String,
+	file_320: String
 });
 
 Pics = mongoose.model('Pics', picSchema);

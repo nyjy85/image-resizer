@@ -9,7 +9,7 @@ var zipFolder = require('zip-folder');
 var editor = path.resolve(__dirname, '../editor.js');
 var dirShit = path.resolve(__dirname, '../public/zips');
 var zipname;
-function compressAndResize (imageUrl, response, file320, file120, file48) {
+function compressAndResize (imageUrl, response) {
   zipname = imageUrl.slice(22).replace(/\.\w+/, ".zip");
   // We need to spawn a child process so that we do not block 
   // the EventLoop with cpu intensive image manipulation 
@@ -41,28 +41,32 @@ router.get('/', function(req, res, next) {
     pics.forEach(function(pic){
       var path = 'images/'+pic.file_name.slice(0,32)+'/';
       // no need to add /public because of static
-      photos = [path + pic.file_120, path + pic.file_320, path + pic.file_48];
+      photos = [path + pic.file_300, path + pic.file_336, path + pic.file_728 , path + pic.file_600, path + pic.file_320];
     })
     res.render('index', { title: 'Image Re-Sizer', pictures: photos, download: zipPath}); 
   })
 });
 
 router.post('/upload', function(req, res, next) {
+  var file300 = req.files.image_url.name.replace(/\./, "300.");
+  var file336 = req.files.image_url.name.replace(/\./, "336.");
+  var file728 = req.files.image_url.name.replace(/\./, "728.");
+  var file600 = req.files.image_url.name.replace(/\./, "600.");
   var file320 = req.files.image_url.name.replace(/\./, "320.");
-  var file120 = req.files.image_url.name.replace(/\./, "120.");
-  var file48 = req.files.image_url.name.replace(/\./, "48.");
 
   if (req.files.image_url) {
     var newPic = new Pics({
       file_name: req.files.image_url.name,
       file_path: req.files.image_url.path,
-      file_320: file320, 
-      file_120: file120, 
-      file_48: file48
+      file_300: file300,
+      file_336: file336,
+      file_728: file728,
+      file_600: file600,
+      file_320: file320
     });
     // multer automatically saves it to /uploads on upload so we need to get that pic from that directory
     // and apply the compressandResize function on it
-    newPic.save(compressAndResize('public/images/uploads/' + req.files.image_url.name, res, file320, file120, file48));
+    newPic.save(compressAndResize('public/images/uploads/' + req.files.image_url.name, res));
   }
 });
 
