@@ -14,28 +14,44 @@ function processImg (filesrc) {
   // save 300 x 200
   .pipe(imageResize({
     width: 300,
-    height: 200
+    height: 250
     // crop: true
   }))
-  .pipe(rename(filesrc.slice(22).replace(/\./, "320.")))
+  .pipe(rename(filesrc.slice(22).replace(/\./, "300.")))
   // .pipe(gulp.dest('public/images/320'))
   .pipe(gulp.dest('public/images/'+filesrc.slice(22, 54)))
   // save 120 x 120
   .pipe(imageResize({
-    width: 120,
-    height: 120
+    width: 336,
+    height: 280
     // crop: true
   }))
-  .pipe(rename(filesrc.slice(22).replace(/\./, "120.")))
+  .pipe(rename(filesrc.slice(22).replace(/\./, "336.")))
   // .pipe(gulp.dest('public/images/120'))
   .pipe(gulp.dest('public/images/'+filesrc.slice(22, 54)))
   // save 48 x 48
   .pipe(imageResize({
-    width: 48,
-    height: 48
+    width: 728,
+    height: 90
     // crop: true
   }))
-  .pipe(rename(filesrc.slice(22).replace(/\./, "48.")))
+  .pipe(rename(filesrc.slice(22).replace(/\./, "728.")))
+  .pipe(gulp.dest('public/images/'+filesrc.slice(22, 54)))
+  // .pipe(gulp.dest('public/images/48'));
+  .pipe(imageResize({
+    width: 300,
+    height: 600
+    // crop: true
+  }))
+  .pipe(rename(filesrc.slice(22).replace(/\./, "600.")))
+  .pipe(gulp.dest('public/images/'+filesrc.slice(22, 54)))
+  // .pipe(gulp.dest('public/images/48'));
+  .pipe(imageResize({
+    width: 320,
+    height: 180
+    // crop: true
+  }))
+  .pipe(rename(filesrc.slice(22).replace(/\./, "320.")))
   .pipe(gulp.dest('public/images/'+filesrc.slice(22, 54)))
   // .pipe(gulp.dest('public/images/48'));
 }
