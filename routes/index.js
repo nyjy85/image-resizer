@@ -40,6 +40,7 @@ router.get('/', function(req, res, next) {
   Pics.find({}, function(err, pics){
     pics.forEach(function(pic){
       var path = 'images/'+pic.file_name.slice(0,32)+'/';
+      console.log('pAATTTTH', path)
       // no need to add /public because of static
       photos = [path + pic.file_300, path + pic.file_336, path + pic.file_728 , path + pic.file_600, path + pic.file_320];
     })

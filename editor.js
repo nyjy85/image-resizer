@@ -1,8 +1,8 @@
 var gulp = require('gulp');
 var imagemin = require('gulp-imagemin');
 var imageResize = require('gulp-image-resize');
-// var rename = require("gulp-rename");
-var responsive = require('gulp-responsive');
+var rename = require("gulp-rename");
+var lwip = require('gulp-lwip');
 
 function processImg (filesrc) {
   console.log('FILESRC BT', filesrc)
@@ -11,59 +11,39 @@ function processImg (filesrc) {
   // compress and save
   .pipe(imagemin({optimizationLevel: 5}))
  
-  .pipe(responsive({
-    name: '*.png',
-    width: 300,
-    height: 250,
-    rename: filesrc.slice(22).replace(/\./, "300.")
-    // crop: true
-  }, {
-    strictMatchImages: false
-  }))
+  .pipe(lwip
+    .scale(0.5)
+    .resize(300, 250)
+  )
+  .pipe(rename(filesrc.slice(22).replace(/\./, "300.")))
   .pipe(gulp.dest('public/images/'+filesrc.slice(22, 54)))
   // save 120 x 120
-  .pipe(responsive({
-    name: '*.png',
-    width: 336,
-    height: 280,
-    rename: filesrc.slice(22).replace(/\./, "336.")
-    // crop: true
-  }, {
-    strictMatchImages: false
-  }))
+  .pipe(lwip
+    .scale(0.5)
+    .resize(336, 280)
+  )
+  .pipe(rename(filesrc.slice(22).replace(/\./, "336.")))
   .pipe(gulp.dest('public/images/'+filesrc.slice(22, 54)))
 
-  .pipe(responsive({
-    name: '*.png',
-    width: 728,
-    height: 90,
-    rename: filesrc.slice(22).replace(/\./, "728.")
-    // crop: true
-  },{
-    strictMatchImages: false
-  }))
+  .pipe(lwip
+    .scale(0.5)
+    .resize(728, 90)
+  )
+  .pipe(rename(filesrc.slice(22).replace(/\./, "728.")))
   .pipe(gulp.dest('public/images/'+filesrc.slice(22, 54)))
   
-  .pipe(responsive({
-    name: '*.png',
-    width: 300,
-    height: 600,
-    rename: filesrc.slice(22).replace(/\./, "600.")
-    // crop: true
-  }, {
-    strictMatchImages: false
-  }))
+  .pipe(lwip
+    .scale(0.5)
+    .resize(300, 600)
+  )
+  .pipe(rename(filesrc.slice(22).replace(/\./, "600.")))
   .pipe(gulp.dest('public/images/'+filesrc.slice(22, 54)))
   
-  .pipe(responsive({
-    name: '*.png',
-    width: 320,
-    height: 180,
-    rename: filesrc.slice(22).replace(/\./, "320.")
-    // crop: true
-  }, {
-    strictMatchImages: false
-  }))
+  .pipe(lwip
+    .scale(0.5)
+    .resize(320, 180)
+  )
+  .pipe(rename(filesrc.slice(22).replace(/\./, "320.")))
   .pipe(gulp.dest('public/images/'+filesrc.slice(22, 54)))
 }
 
